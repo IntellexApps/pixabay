@@ -56,13 +56,14 @@ class SearchParams implements \JsonSerializable {
 	/**
 	 * Initialize the ImageSearchParams.
 	 *
-	 * @param array $params An optional list of parameters as array, @see https://pixabay.com/api/docs/.
+	 * @param array|null $params An optional list of parameters as array, @see
+	 *                           https://pixabay.com/api/docs/.
 	 *
 	 * @throws UnsupportedSearchParameterException
 	 * @throws ValidationException
 	 */
 	public function __construct($params = []) {
-		foreach ($params as $key => $value) {
+		foreach ((array) $params as $key => $value) {
 			$key = str_replace('_', '', strtolower($key));
 			switch ($key) {
 				case 'q':

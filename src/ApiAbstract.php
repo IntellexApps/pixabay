@@ -32,7 +32,7 @@ abstract class ApiAbstract {
 	/**
 	 * Fetch from the API.
 	 *
-	 * @param SearchParams|array $params The list of GET params to use.
+	 * @param SearchParams|array|null $params The list of GET params to use.
 	 *
 	 * @return Page The full response from the server.
 	 * @throws TooManyRequestsException
@@ -41,10 +41,15 @@ abstract class ApiAbstract {
 	 * @throws UnexpectedPixabayException
 	 * @throws UnsupportedSearchParameterException
 	 */
-	public function fetch($params = []) {
+	public function fetch($params = null) {
 
 		// Set the url
 		$url = static::ENDPOINT . $this->apiPrefix();
+
+		// Default parameters
+		if ($params === null) {
+			$params = new SearchParams();
+		}
 
 		// Make sure the parameters are sent as object
 		if (is_array($params)) {
