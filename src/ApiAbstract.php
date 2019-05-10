@@ -130,7 +130,10 @@ abstract class ApiAbstract {
 		curl_setopt_array($curl, $options);
 
 		// Load
-		list($headerBlock, $body) = preg_split('~\r?\n\r?\n~', curl_exec($curl), 2);
+		if (($response = curl_exec($curl)) === false) {
+			throw new \Exception('Unable to curl_exec()');
+		}
+		list($headerBlock, $body) = preg_split('~\r?\n\r?\n~', curl_exec($response), 2);
 		$httpResponseCode = curl_getinfo($curl, CURLINFO_HTTP_CODE);
 		curl_close($curl);
 
