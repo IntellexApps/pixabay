@@ -11,6 +11,48 @@ use Intellex\Pixabay\Validation\ValidationException;
  */
 class SearchParams implements \JsonSerializable {
 
+	/** @const string An URL encoded search term. If omitted, all images are returned. This value may not exceed 100 characters. Example: "yellow+flower". */
+	const QUERY = 'query';
+
+	/** @const string Language code of the language to be searched in. @see Language. Default: "en". */
+	const LANG = 'lang';
+
+	/** @const string Filter results by image type. @see ImageType. Default: "all". */
+	const IMAGE_TYPE = 'imageType';
+
+	/** @const string Filter results by video type. @see VideoType. Default: "all" */
+	const VIDEO_TYPE = 'videoType';
+
+	/** @const string Whether an image is wider than it is tall, or taller than it is wide. @see Orientation". Default: "all". */
+	const ORIENTATION = 'orientation';
+
+	/** @const string Filter results by category. @see Category. */
+	const CATEGORY = 'category';
+
+	/** @const int Minimum image width. Default: "0". */
+	const MIN_WIDTH = 'minWidth';
+
+	/** @const int Minimum image height. Default: "0". */
+	const MIN_HEIGHT = 'minHeight';
+
+	/** @const string|string[] Filter images by color properties.@see Color. */
+	const COLORS = 'colors';
+
+	/** @const bool Select images that have received an Editor's Choice award. Accepted values: true or false. Default: "false". */
+	const EDITORS_CHOICE = 'editorsChoice';
+
+	/** @const bool A flag indicating that only images suitable for all ages should be returned. Accepted values: true or false. Default: "false". */
+	const SAFE_SEARCH = 'safeSearch';
+
+	/** @const string How the results should be ordered. @see Order. Default: "popular". */
+	const ORDER = 'order';
+
+	/** @const int Returned search results are paginated. Use this parameter to select the page number. Default: 1. */
+	const PAGE = 'page';
+
+	/** @const int Determine the number of results per page. Accepted values: 3 - 200. Default: 20. */
+	const PER_PAGE = 'perPage';
+
 	/** @var string An URL encoded search term. If omitted, all images are returned. This value may not exceed 100 characters. Example: "yellow+flower". */
 	private $query = null;
 

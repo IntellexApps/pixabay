@@ -21,6 +21,9 @@ class Image extends DataAbstract {
 	/** @var string Source page on Pixabay, which provides a download link for the original image of the dimension imageWidth x imageHeight and the file size imageSize. */
 	public $pageURL;
 
+	/** @var string Scaled image with a maximum width/height of 1280px. */
+	public $largeImageURL;
+
 	/** @var string Low resolution images with a maximum width or height of 150 px (previewWidth x previewHeight). */
 	public $previewURL;
 
@@ -68,6 +71,7 @@ class Image extends DataAbstract {
 		return [
 			'id'              => 'nonNegativeInteger',
 			'pageURL'         => 'string',
+			'largeImageURL'   => 'string',
 			'previewURL'      => 'string',
 			'previewWidth'    => 'nonNegativeInteger',
 			'previewHeight'   => 'nonNegativeInteger',
@@ -97,6 +101,7 @@ class Image extends DataAbstract {
 		$this->pageURL = $json->pageURL;
 		$this->type = $json->type;
 		$this->tags = preg_split('~\s*,\s*~', $json->tags);
+		$this->largeImageURL = $json->largeImageURL;
 		$this->previewURL = $json->previewURL;
 		$this->previewWidth = $json->previewWidth;
 		$this->previewHeight = $json->previewHeight;
@@ -160,6 +165,11 @@ class Image extends DataAbstract {
 	 */
 	private function getURLForSize($size) {
 		return preg_replace('~_640(\.\w+)$~', "_{$size}\$1", $this->webformatURL);
+	}
+
+	/** @return string Te URL to the large image, as returned bu the API. */
+	public function getLargeImage() {
+		return $this->largeImageURL;
 	}
 
 }
